@@ -5,10 +5,8 @@ image.path = 'Diatom/Figures/'
 dir.create(data.path, showWarnings = T)
 dir.create(image.path, showWarnings = T)
 
-################################################################################
-## diatom preparation
-################################################################################
-## read data
+## ==== diatom preparation ====
+### ==== read data ====
 diatom.df = read.csv(paste0(data.path, 'diatom.csv'))
 diatom.info = read.csv(paste0(data.path,'diatom codes.csv'))
 
@@ -21,7 +19,7 @@ diatom.info$class[diatom.info$class == ''] = 'others'
 diatom.info$class = factor(diatom.info$class, levels = c('warm water','open ocean','sea ice','others'))
 diatom.info$color = c('hotpink','green3','dodgerblue','black')[diatom.info$class]
 
-## get scores
+### ==== get scores ====
 diatom.res = list(X = diatom.X, info = diatom.info)
 # system.time({diatom.res$psas = psa(diatom.X, 's')})
 # saveRDS(diatom.res$psas, paste0(data.path, 'diatom_psas.rds'))
@@ -38,10 +36,8 @@ diatom.res$pca = flip_loading(diatom.res$pca, c(1,2,3))
 diatom.res$power_pca = flip_loading(diatom.res$power_pca, c(1,2,4))
 diatom.res$apca = flip_loading(diatom.res$apca, c(1,2))
 
-################################################################################
-## descriptive figures
-################################################################################
-## marker setup
+## ==== descriptive figures ====
+### ==== marker setup ====
 diatom.colors = list(colors = c('blue','magenta','red','orange','green'),
                      values = rescale(c(56.53,65.04,67.03,69.74,83.99), to = c(0,1)))
 g = ggplot(diatom.df, aes(x=Depth, y=Depth, col=Depth)) +
@@ -58,7 +54,7 @@ diatom.col = ggplot_build(g)$data[[1]]$colour
 diatom.shape = c(rep(1,35),rep(16,4),rep(1,32))
 diatom.size = c(rep(1,35),rep(2,4),rep(1,32))
 
-## heatmap
+### ==== heatmap ====
 diatom.X.log = log10(replace_zero(diatom.X))
 
 heatmap.df = as.data.frame(diatom.X.log) %>%
@@ -103,7 +99,7 @@ g = plot_grid(g1, g2, nrow = 1, rel_widths = c(1,10), align = 'h', axis = 'tb')
 ggsave('1. diatom_heatmap.jpeg', g, path = image.path, width = 12, height = 4)
 
 
-## mean proportion versus log scale variance
+### ==== mean proportion versus log scale variance ====
 g = data.frame(mean_prop = colMeans(diatom.X),
                sd_log10 = apply(diatom.X.log, 2, sd),
                label = diatom.info$class) %>%
@@ -117,7 +113,7 @@ g = data.frame(mean_prop = colMeans(diatom.X),
   labs(x = 'Mean proportion', y = 'Standard deviation (log10)')
 ggsave('1. diatom_mean_proportion_versus_variance.jpeg', g, path = image.path, width = 6, height = 3)
 
-## parallel coordinate plot
+### ==== parallel coordinate plot ====
 g = parallel_coord(diatom.X, diatom.df$Depth, diatom.info[as.character(colnames(diatom.X)),'code']) +
   scale_color_gradientn(colors = diatom.colors$colors,
                         values = diatom.colors$values,
@@ -134,7 +130,7 @@ g = parallel_coord(diatom.X, diatom.df$Depth, diatom.info[as.character(colnames(
 
 ggsave('1. Parallel_plot_raw.jpeg', g, path = image.path, width = 12, height = 6)
 
-## depth distribution
+### ==== depth distribution ====
 n = length(diatom.df$Depth)
 diatom.depth.df = data.frame(Depth = diatom.df$Depth,
                              y = rev((1:n)/n-1/2/n))
@@ -156,7 +152,7 @@ g = ggplot(diatom.depth.df, aes(x = Depth, y = y, col = Depth)) +
 
 ggsave('1. Depth_distribution.jpeg', g, path = image.path, width = 8, height = 3)
 
-## percent nonzero
+### ==== percent nonzero ====
 df = data.frame(variable = colnames(diatom.X),
                 percent.nonzero = colSums(diatom.X > 0)/nrow(diatom.X))
 df$variable = factor(df$variable, levels = df$variable)
@@ -171,10 +167,8 @@ g = ggplot(df, aes(x = variable, y = percent.nonzero)) +
 
 ggsave('1. Percent_nonzero.jpeg', g, path = image.path, width = 8, height = 4)
 
-################################################################################
-## Comparison
-################################################################################
-## create all panels
+## ==== Comparison ====
+### ==== create all panels ====
 g.psas = line_gpairs(cbind(diatom.res$psas$scores[,1:4], data.frame(Depth = diatom.df$Depth)),
                      col.point = diatom.col, col.line = diatom.col,
                      shape = diatom.shape, size = diatom.size)
@@ -191,7 +185,7 @@ g.apca = line_gpairs(cbind(diatom.res$apca$scores[,1:4], data.frame(Depth = diat
                      col.point = diatom.col, col.line = diatom.col,
                      shape = diatom.shape, size = diatom.size)
 
-## score 1 vs score 2
+### ==== score 1 vs score 2 ====
 g = plot_grid(diatom.legend,
               getPlot(g.psas, 2, 1) + ggtitle('PSA-S') +
                 scale_x_continuous(limits=c(-0.4,0.63)) + scale_y_continuous(limits=c(-0.4,0.63)),
@@ -206,7 +200,7 @@ g = plot_grid(diatom.legend,
               nrow = 2, align='hv', axis='tblr')
 ggsave('2. Score_1vs2.jpeg', g, path = image.path, width = 10.5, height = 7)
 
-## PSA-O scores
+### ==== PSA-O scores ====
 g = plot_grid(getPlot(g.psao, 5, 1),
               getPlot(g.psao, 5, 2),
               getPlot(g.psao, 5, 3),
@@ -215,7 +209,7 @@ g = plot_grid(getPlot(g.psao, 5, 1),
               nrow = 1, rel_widths = c(2,2,2,2,1))
 ggsave('2. Score_psao_diag.jpeg', g, path = image.path, width = 14.5, height = 3)
 
-## save matrices
+### ==== save matrices ====
 add_gap <- function(g){
   gg = ggmatrix_gtable(gpairs_lower(g))
   gg$heights[[15]] = unit(0.4, 'null')
@@ -244,7 +238,7 @@ ggsave('2-3. Score_pca.jpeg', g.pca, path = image.path, width = 9*1.2, height = 
 ggsave('2-4. Score_power_pca.jpeg', g.power_pca, path = image.path, width = 9*1.2, height = 9)
 ggsave('2-5. Score_apca.jpeg', g.apca, path = image.path, width = 9*1.2, height = 9)
 
-## loading bar plots
+### ==== loading bar plots ====
 plot_loadings_diatom <- function(V, k = 4, max.k = 12){
   ls = list()
   for(i in 1:k){
@@ -270,7 +264,7 @@ g = plot_grid(ggdraw() + draw_label('PSA-S'), plot_loadings_diatom(diatom.res$ps
           ncol=2, align='v', axis='lrtb', rel_widths = c(1,6))
 ggsave('3. loading_bar_all.jpeg', g, path = image.path, width = 16, height = 16)
 
-## loading parallel coord
+### ==== loading parallel coord ====
 g.axis = loading_parallel(diatom.res$psas$loadings[,1],
                           diatom.info[as.character(colnames(diatom.X)),'code']) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 10),
@@ -313,10 +307,8 @@ g = plot_grid(plot_grid(ggdraw() + draw_label('Comp.1'), ggdraw() + draw_label('
 
 ggsave('4. loading_parallel_psao.jpeg', g, path = image.path, width = 12, height = 7)
 
-################################################################################
-## ternary
-################################################################################
-## ternary plot
+## ==== ternary ====
+### ==== ternary plot ====
 psas.tern = as.data.frame(diatom.res$psas$Xhat_reduced$`r=2`) %>%
   mutate(Depth = diatom.df$Depth) %>%
   ggtern(aes(x=V1, y=V3, z=V2)) +
@@ -343,17 +335,15 @@ psao.tern = plot_grid(ggtern::ggplot_gtable(ggtern::ggplot_build(psao.tern)),
                       rel_widths = c(3,1))
 ggsave('3-2. ternary_psao.jpeg', psao.tern, path = image.path, width = 8, height = 5)
 
-## ternary vertices
+### ==== ternary vertices ====
 g = plot_loadings_diatom(diatom.res$psas$Vhat$`r=2`, 3)
 ggsave('3-3. ternary_vertex_psas.jpeg', g, path = image.path, width = 12, height = 4)
 g = plot_loadings_diatom(diatom.res$psao$Vhat$`r=2`, 3)
 ggsave('3-4. ternary_vertex_psao.jpeg', g, path = image.path, width = 12, height = 4)
 
 
-################################################################################
-## Variance explained & RSS
-################################################################################
-## variance explained
+## ==== Variance explained & RSS ====
+### ==== variance explained ====
 var_exp = rbind(c(diatom.res$psas$RSS,0),
             c(diatom.res$psao$RSS,0),
             diatom.res$pca$RSS,
@@ -363,7 +353,7 @@ rownames(var_exp) = c('PSA-S','PSA-O','PCA','Power transform','Log-ratio')
 g = plot_variance_explained(var_exp, 6)
 ggsave('variance_explained.jpeg', g, path = image.path, width = 8, height = 4)
 
-## RSS
+### ==== RSS ====
 rss.mat = matrix(NA, 6, 6)
 rownames(rss.mat) = c('PSA-S','PSA-O','PCA','Power transform','Log-ratio','PCA (projected)')
 colnames(rss.mat) = paste0('PC',1:6)
@@ -392,9 +382,7 @@ g = rss.mat %>%
 ggsave('diatom_rss.jpeg', g, path = image.path, width = 8, height = 4)
 
 
-################################################################################
-## biplots
-################################################################################
+## ==== biplots ====
 draw_biplot <- function(res){
   x = res$scores[,1:2]
   y = res$loadings[,1:2]
@@ -403,9 +391,12 @@ draw_biplot <- function(res){
   dfx = data.frame(x = x[,1], y = x[,2], Depth = diatom.df$Depth)
   dfy = data.frame(x = 0, y = 0, xend = y[,1], yend = y[,2],
                    size = sqrt(rowSums(y[,1:2]**2)),
-                   label=diatom.info[rownames(y),]$code,
+                   label=diatom.info[rownames(y),]$short_code,
                    color=factor(diatom.info[rownames(y),]$color))
-  dfy = dfy %>% arrange(desc(size)) %>% head(10)
+  dfy = dfy %>% arrange(desc(size)) %>% head(12)
+  dfy2 = dfy
+  yend = dfy2$yend
+  dfy2$yend[abs(yend)<0.001] = (sum(abs(yend)<0.001):1)*(max(yend)-min(yend))/20
 
   ggplot() +
     theme_bw() +
@@ -418,31 +409,29 @@ draw_biplot <- function(res){
     geom_segment(data=dfy, aes(x=x,y=y,xend=xend,yend=yend),
                  arrow = arrow(length=unit(5,'points')), linewidth=0.2, color = 'black') +
     new_scale_color() +
-    geom_text(data=dfy, aes(x=xend, y=yend, label=label, col=color), size=3) +
+    geom_text(data=dfy2, aes(x=xend, y=yend, label=label, col=color), size=3) +
     scale_color_manual(values = levels(dfy$color)) +
     labs(x='Comp.1', y='Comp.2') +
     theme(legend.position = 'none',
           plot.title=element_text(hjust=0.5))
 }
 
-g = plot_grid(diatom.legend,
-              draw_biplot(diatom.res$psas) + ggtitle('PSA-S') +
-                scale_x_continuous(limits=c(-0.4,0.63)) + scale_y_continuous(limits=c(-0.4,0.63)),
-              draw_biplot(diatom.res$psao) + ggtitle('PSA-O') +
-                scale_x_continuous(limits=c(-0.52,0.81)) + scale_y_continuous(limits=c(-0.52,0.81)),
-              draw_biplot(diatom.res$pca) + ggtitle('PCA') +
+g = plot_grid(draw_biplot(diatom.res$pca) + ggtitle('PCA') +
                 scale_x_continuous(limits=c(-0.21,0.23)) + scale_y_continuous(limits=c(-0.21,0.23)),
               draw_biplot(diatom.res$power_pca) + ggtitle('Power Transform PCA') +
                 scale_x_continuous(limits=c(-0.12,0.2)) + scale_y_continuous(limits=c(-0.12,0.2)),
               draw_biplot(diatom.res$apca) + ggtitle('Log-ratio PCA') +
                 scale_x_continuous(limits=c(-7.3,7.3)) + scale_y_continuous(limits=c(-7.3,7.3)),
-              nrow = 2, align='hv', axis='tblr')
-ggsave('score_biplot.jpeg', g, path = image.path, width = 10.5, height = 7)
+              diatom.legend,
+              draw_biplot(diatom.res$psas) + ggtitle('PSA-S') +
+                scale_x_continuous(limits=c(-0.4,0.63)) + scale_y_continuous(limits=c(-0.4,0.63)),
+              draw_biplot(diatom.res$psao) + ggtitle('PSA-O') +
+                scale_x_continuous(limits=c(-0.52,0.81)) + scale_y_continuous(limits=c(-0.52,0.81)),
+              nrow = 3, align='hv', axis='tblr', byrow = F)
+ggsave('score_biplot.jpeg', g, path = image.path, width = 7, height = 10.5)
 
 
-################################################################################
-## PCA before projection
-################################################################################
+## ==== PCA before projection ====
 g = parallel_coord(diatom.res$pca$Xhat$`r=1`, diatom.df$Depth, diatom.info[as.character(colnames(diatom.X)),'code']) +
   scale_color_gradientn(colors = diatom.colors$colors,
                         values = diatom.colors$values,

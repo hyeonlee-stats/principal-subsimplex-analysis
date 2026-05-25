@@ -1,62 +1,62 @@
-name,code,class
-Actinocyclus curvatulus,A. curvatulus,
-Actinocyclus dimorphus,A. dimorphus,
-Actinocyclus ingens,A. ingens,
-Actinocyclus ingens var. nodus*,A. ingens var. nodus,
-Actinocyclus karstenii ,A. karstenii,sea ice
-Actynocyclus cf. karsteni,A. cf. karsteni,
-Actinocyclus maccollumii ,A. maccollumii,
-Actinocyclus spp.,A. spp.,
-Azpeitia spp.,Azpeitia spp.,
-Chaetoceros spp. (resting spores),Chaetoceros spp. rest.,
-Chaetoceros spp.,Chaetoceros spp.,
-Cocconeis spp.,Cocconeis spp.,
-Corethron criophilum,Corethron criophilum,
-Coscinodiscus spp.,Coscinodiscus spp.,
-Dactyliosolen antarcticus,Dactyliosolen antarcticus,open ocean
-Denticulopsis spp.*,Denticulopsis spp.,
-Eucampia antarctica,Eucampia antarctica,sea ice
-Fragilariopsis arcula ,F. arcula,
-Fragilariopsis aurica,F. aurica,
-Fragilariopsis barronii ,F. barronii,open ocean
-Fragilariopsis bohatyi,F. bohatyi,sea ice
-Fragilariopsis curta,F. curta,sea ice
-Fragilariopsis kerguelensis transitional form  ,F. kerguelensis trans.,
-Fragilariopsis praeinterfrigidaria ,F. praeinterfrigidaria,
-Fragilariopsis interfrigidaria ,F. interfrigidaria,
-Fragilariopsis ritscheri ,F. ritscheri,sea ice
-Fragilariopsis barronii / ritscheri transtitional form,F. barronii ritscheri trans.,
-Fragilariopsis clementia ,F. clementia,warm water
-Fragilariopsis spp.,F. spp.,
-Fragilariopsis sublinearis,F. sublinearis,sea ice
-Fragilariopsis weaveri,F. weaveri,warm water
-Proboscia barboi ,Proboscia barboi ,
-Pyxilla spp.*,Pyxilla spp.,
-Rhizosolenia antennata var. semispina,Rhizo. antennata semispina,
-Rhizosolenia antennata var. antennata,Rhizo. antennata antennata,
-Rhizosolenia crassa,Rhizo. crassa,
-Rhizosolenia simplex,Rhizo. simplex,
-Rhizosolenia sp. B of Harwood and Maruyama,Rhizo. sp. B,
-Rhizosolenia spp.,Rhizosolenia spp.,
-Rouxia antarctica,R. antarctica,open ocean
-Rouxia diploneides,R. diploneides,
-Rouxia isopolica ,R. isopolica,open ocean
-Rouxia naviculoides ,R. naviculoides,open ocean
-Rouxia spp.,R. spp.,
-Shionodiscus oestrupi / tetraoestrupii ,Shionodiscus,
-Stellarima microtrias,Stellarima microtrias,sea ice
-Stephanopyxis spp.,Stellarima microtrias ,
-Synedropsis spp.,Synedropsis spp.,
-Synedropsis cheethamii ,Synedropsis cheethamii ,
-Thalassiosira complicata,T. complicata,
-Thalassiosira fasciculata,T. fasciculata,
-Thalassiosira insigna,T. insigna,
-Thalassiosira inura,T. inura,
-Thalassiosira kolbei,T. kolbei,
-Thalassiosira lentiginosa,T. lentiginosa,
-Thalassiosira oliverana ,T. oliverana,open ocean
-Thalassiosira spp.,T. spp,
-Thalassiosira striata,T. striata,
-Thalassiosira torokina ,T. torokina,sea ice
-Thalassiosira vulnifica,T. vulnifica,
-Thalassiothrix spp.,T.hrix spp.,open ocean
+name,code,class,short_code
+Actinocyclus curvatulus,A. curvatulus,,A. curv.
+Actinocyclus dimorphus,A. dimorphus,,A. dimo.
+Actinocyclus ingens,A. ingens,,A. inge.
+Actinocyclus ingens var. nodus*,A. ingens var. nodus,,A. nodu.
+Actinocyclus karstenii ,A. karstenii,sea ice,A. kars.
+Actynocyclus cf. karsteni,A. cf. karsteni,,A. cf.
+Actinocyclus maccollumii ,A. maccollumii,,A. macc.
+Actinocyclus spp.,A. spp.,,A. spp.
+Azpeitia spp.,Azpeitia spp.,,Azpe. spp.
+Chaetoceros spp. (resting spores),Chaetoceros spp. rest.,,Chae. rest.
+Chaetoceros spp.,Chaetoceros spp.,,Chae. spp.
+Cocconeis spp.,Cocconeis spp.,,Cocc. spp.
+Corethron criophilum,Corethron criophilum,,Core. crio.
+Coscinodiscus spp.,Coscinodiscus spp.,,Cosc. spp.
+Dactyliosolen antarcticus,Dactyliosolen antarcticus,open ocean,Dact. anta.
+Denticulopsis spp.*,Denticulopsis spp.,,Dent. spp.
+Eucampia antarctica,Eucampia antarctica,sea ice,E. anta.
+Fragilariopsis arcula ,F. arcula,,F. arcu.
+Fragilariopsis aurica,F. aurica,,F. auri.
+Fragilariopsis barronii ,F. barronii,open ocean,F. barr.
+Fragilariopsis bohatyi,F. bohatyi,sea ice,F. boha.
+Fragilariopsis curta,F. curta,sea ice,F. curt.
+Fragilariopsis kerguelensis transitional form  ,F. kerguelensis trans.,,F. kerg.
+Fragilariopsis praeinterfrigidaria ,F. praeinterfrigidaria,,F. prae.
+Fragilariopsis interfrigidaria ,F. interfrigidaria,,F. inte.
+Fragilariopsis ritscheri ,F. ritscheri,sea ice,F. rits.
+Fragilariopsis barronii / ritscheri transtitional form,F. barronii ritscheri trans.,,F. tran.
+Fragilariopsis clementia ,F. clementia,warm water,F. clem.
+Fragilariopsis spp.,F. spp.,,F. spp.
+Fragilariopsis sublinearis,F. sublinearis,sea ice,F. subl.
+Fragilariopsis weaveri,F. weaveri,warm water,F. weav.
+Proboscia barboi ,Proboscia barboi ,,Prob. barb.
+Pyxilla spp.*,Pyxilla spp.,,Pyxi. spp.
+Rhizosolenia antennata var. semispina,Rhizo. antennata semispina,,Rhizo. semi.
+Rhizosolenia antennata var. antennata,Rhizo. antennata antennata,,Rhizo. ante.
+Rhizosolenia crassa,Rhizo. crassa,,Rhizo. cras.
+Rhizosolenia simplex,Rhizo. simplex,,Rhizo. simp.
+Rhizosolenia sp. B of Harwood and Maruyama,Rhizo. sp. B,,Rhizo. sp. B
+Rhizosolenia spp.,Rhizosolenia spp.,,Rhizo. spp.
+Rouxia antarctica,R. antarctica,open ocean,R. anta.
+Rouxia diploneides,R. diploneides,,R. dipl.
+Rouxia isopolica ,R. isopolica,open ocean,R. isop.
+Rouxia naviculoides ,R. naviculoides,open ocean,R. navi.
+Rouxia spp.,R. spp.,,R. spp.
+Shionodiscus oestrupi / tetraoestrupii ,Shionodiscus,,Shio.
+Stellarima microtrias,Stellarima microtrias,sea ice,Stel. Mi
+Stephanopyxis spp.,Stellarima microtrias ,,Step. spp.
+Synedropsis spp.,Synedropsis spp.,,Syne. spp.
+Synedropsis cheethamii ,Synedropsis cheethamii ,,Syne. chee.
+Thalassiosira complicata,T. complicata,,T. comp.
+Thalassiosira fasciculata,T. fasciculata,,T. fasc.
+Thalassiosira insigna,T. insigna,,T. insi.
+Thalassiosira inura,T. inura,,T. inur.
+Thalassiosira kolbei,T. kolbei,,T. kolb.
+Thalassiosira lentiginosa,T. lentiginosa,,T. lent.
+Thalassiosira oliverana ,T. oliverana,open ocean,T. oliv.
+Thalassiosira spp.,T. spp,,T. spp.
+Thalassiosira striata,T. striata,,T. stri.
+Thalassiosira torokina ,T. torokina,sea ice,T. toro.
+Thalassiosira vulnifica,T. vulnifica,,T. vuln.
+Thalassiothrix spp.,T.hrix spp.,open ocean,T.hrix spp.
