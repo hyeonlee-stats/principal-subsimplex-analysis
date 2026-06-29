@@ -1,7 +1,7 @@
 source('PSA_setup.R')
 invisible(lapply(list.files('utils', pattern = '.R', full.names = T), source))
 
-## PCA failure
+## ==== PCA failure ====
 set.seed(1)
 X = matrix(c(c(0.1,0.4,0.5) + rnorm(3*4, 0, 0.05),
              c(0.55,0.05,0.4) + rnorm(3*4, 0, 0.05)),
@@ -43,7 +43,8 @@ g$layers[[2]]$aes_params$size = 8
 
 ggsave('auxiliary/Figures/PCA_failure.jpeg', g, width = 5.5, height = 5)
 
-## Log-ratio PCA description
+## ==== log-ratio example ====
+### ==== data in original space ====
 set.seed(1)
 X = matrix(c(rep(c(0.15, 0.15, 0.7), 5),
               rep(c(0.3,0.1,0.6), 5)) + runif(3*10, 0, 0.2), ncol = 3, byrow = T)
@@ -57,9 +58,8 @@ colnames(X) = c('V1','V2','V3')
 g1 = ggtern(X, aes(x=V1,y=V3,z=V2)) +
   geom_point(col = c('red','deepskyblue',rep('black',10))) +
   theme_bw()
-ggsave('auxiliary/Figures/Log-ratio PCA1.jpeg', g1, width = 4, height = 4)
 
-
+### ==== modes of variation in clr space ====
 X.clr = clr(X) %*% matrix(c(1,-1,0, -0.5,-0.5,1), byrow = F, ncol = 2)
 
 pca.log = princomp(X.clr)
@@ -83,9 +83,8 @@ g2 = ggplot(X.clr, aes(x=Z1,y=Z2)) +
   scale_x_continuous(limits = c(-1.5,3)) +
   scale_y_continuous(limits = c(-1.5,3))
 
-ggsave('auxiliary/Figures/Log-ratio PCA2.jpeg', g2, width = 4, height = 4)
 
-
+### ==== modes of variation in original space ====
 pca.clr = princomp(clr(X))
 pc1.clr = as.data.frame(clrInv(outer(rep(1,2001),pca.clr$center) + outer((-1000:1000)/100,pca.clr$loadings[,1])))
 pc2.clr = as.data.frame(clrInv(outer(rep(1,2001),pca.clr$center) + outer((-1000:1000)/100,pca.clr$loadings[,2])))
@@ -97,5 +96,9 @@ g3 = ggtern(X, aes(x=V1,y=V3,z=V2)) +
   geom_path(data = pc1.clr, col = 'magenta') +
   geom_path(data = pc2.clr, col = 'forestgreen') +
   theme_bw()
-ggsave('auxiliary/Figures/Log-ratio PCA3.jpeg', g3, width = 4, height = 4)
+
+g1 = ggtern::ggplot_gtable(ggtern::ggplot_build(g1))
+g3 = ggtern::ggplot_gtable(ggtern::ggplot_build(g3))
+plot_grid(g1, g2, g3, nrow = 1)
+ggsave('auxiliary/Figures/logratio_pca.jpeg', width = 12, height = 4)
 
