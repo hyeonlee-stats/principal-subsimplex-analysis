@@ -1,5 +1,5 @@
 library(devtools)
-devtools::install_github('haneone33/psacomp')
+devtools::install_github('hyeonlee-stats/psacomp')
 library(psacomp)
 
 library(plyr)
